@@ -27,10 +27,10 @@
 
 Name of feature: Storing and fetching books from our database - Lab 11
 
-Estimate of time needed to complete: 93 mins 
+Estimate of time needed to complete: 93 mins
 
 Start time: 1:00pm
 
-Finish time: _____
+Finish time: 4:30pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 3 hrs 30 mins
