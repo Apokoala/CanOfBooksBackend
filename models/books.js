@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
-    title: String,
-    description: String,
-    status: String
+  title: String,
+  description: String,
+  status: String
 });
 
 //after making a schema you have to model it
