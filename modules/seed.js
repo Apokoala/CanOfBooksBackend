@@ -41,7 +41,6 @@ async function seed() {
 
   console.log ('done seeding!');
   mongoose.disconnect();
-
 }
 
 seed();
