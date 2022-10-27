@@ -29,6 +29,6 @@ app.get('/test', (req, res) => res.send('test request received'));
 app.get('/books', Handler.getBooks);
 app.post('/books', Handler.createBook);
 // id is params
-app.delete('/books:id', Handler.deleteBook);
+app.delete('/books/:id', Handler.deleteBook);
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
