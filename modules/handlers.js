@@ -43,4 +43,18 @@ Handler.deleteBook = async (req, res, next) => {
   }
 };
 
+Handler.updateBook = async (req, res, next) => {
+  try {
+    // need id params and updated info in the req body, add option of new: true to show updated
+    const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    // express response objects will not forward a response body if response status code is 204 no content
+    res.status(200).send(updatedBook);
+  }
+  catch (error) {
+    error.customMessage = 'Something went wrong with updating your book: ';
+    console.error(error.customMessage + error);
+    next(error);
+  }
+};
+
 module.exports = Handler;
