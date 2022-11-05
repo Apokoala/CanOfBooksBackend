@@ -8,7 +8,7 @@ const Handler = {};
 Handler.getBooks = async (req, res, next) => {
   try {
     // if i pass an empty object, that tells Mongoose to get ALL the documents from database 
-    const books = await Book.find({});
+    const books = await Book.find({email: req.user.email});
     res.status(200).send(books);
   }
   catch (error) {
@@ -20,7 +20,7 @@ Handler.getBooks = async (req, res, next) => {
 
 Handler.createBook = async (req, res, next) => {
   try {
-    const books = await Book.create(req.body);
+    const books = await Book.create(req.body, {email: req.user.email});
     res.status(201).send(books);
   }
   catch (error) {
@@ -32,7 +32,7 @@ Handler.createBook = async (req, res, next) => {
 
 Handler.deleteBook = async (req, res, next) => {
   try {
-    await Book.findByIdAndDelete(req.params.id);
+    await Book.findByIdAndDelete(req.params.id, {email: req.user.email});
     // express response objects will not forward a response body if response status code is 204 no content
     res.status(200).send('Your book is deleted!');
   }
@@ -46,7 +46,7 @@ Handler.deleteBook = async (req, res, next) => {
 Handler.updateBook = async (req, res, next) => {
   try {
     // need id params and updated info in the req body, add option of new: true to show updated
-    const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, {new: true, email: req.user.email});
     // express response objects will not forward a response body if response status code is 204 no content
     res.status(200).send(updatedBook);
   }
@@ -56,5 +56,11 @@ Handler.updateBook = async (req, res, next) => {
     next(error);
   }
 };
+
+Handler.getUser = (req, res) => {
+  console.log('Getting the user');
+  res.send(req.user);
+};
+
 
 module.exports = Handler;
