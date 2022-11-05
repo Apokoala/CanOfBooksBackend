@@ -6,7 +6,8 @@ const Schema = mongoose.Schema;
 const bookSchema = new Schema({
   title: String,
   description: String,
-  status: String
+  status: String,
+  email: String
 });
 
 //after making a schema you have to model it
