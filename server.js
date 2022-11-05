@@ -5,6 +5,7 @@ require('dotenv').config();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const Handler = require('./modules/handlers');
+const verifyUser = require('./auth.js');
 
 const app = express();
 app.use(cors());
@@ -24,12 +25,19 @@ db.once('open', function() {
   console.log('Mongoose is connected');
 });
 
-app.get('/test', (req, res) => res.send('test request received'));
+function handleGetUser(req, res) {
+  console.log('Getting the user');
+  res.send(req.user);
+}
 
+app.use(verifyUser);
+app.get('/test', (req, res) => res.send('test request received'));
 app.get('/books', Handler.getBooks);
 app.post('/books', Handler.createBook);
 // id is params
 app.delete('/books/:id', Handler.deleteBook);
 app.put('/books/:id', Handler.updateBook);
+app.get('/user', handleGetUser);
+
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
