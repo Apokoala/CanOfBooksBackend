@@ -25,11 +25,6 @@ db.once('open', function() {
   console.log('Mongoose is connected');
 });
 
-function handleGetUser(req, res) {
-  console.log('Getting the user');
-  res.send(req.user);
-}
-
 app.use(verifyUser);
 app.get('/test', (req, res) => res.send('test request received'));
 app.get('/books', Handler.getBooks);
@@ -37,7 +32,7 @@ app.post('/books', Handler.createBook);
 // id is params
 app.delete('/books/:id', Handler.deleteBook);
 app.put('/books/:id', Handler.updateBook);
-app.get('/user', handleGetUser);
+app.get('/user', Handler.getUser);
 
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
